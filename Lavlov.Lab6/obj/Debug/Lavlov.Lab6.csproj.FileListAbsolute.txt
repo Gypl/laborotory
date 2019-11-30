@@ -1,0 +1,6 @@
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\obj\Debug\Lavlov.Lab6.csprojAssemblyReference.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\bin\Debug\Lavlov.Lab6.exe.config
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\bin\Debug\Lavlov.Lab6.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\bin\Debug\Lavlov.Lab6.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\obj\Debug\Lavlov.Lab6.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab6\obj\Debug\Lavlov.Lab6.pdb

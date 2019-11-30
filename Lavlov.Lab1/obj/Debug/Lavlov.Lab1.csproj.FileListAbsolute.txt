@@ -1,0 +1,14 @@
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.exe.config
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.csprojAssemblyReference.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.csproj.CoreCompileInputs.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov.Lab1\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.exe.config
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\bin\Debug\Lavlov.Lab1.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.csprojAssemblyReference.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.csproj.CoreCompileInputs.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab1\obj\Debug\Lavlov.Lab1.pdb

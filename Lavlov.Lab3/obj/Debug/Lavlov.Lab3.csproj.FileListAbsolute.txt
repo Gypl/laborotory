@@ -1,0 +1,6 @@
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\bin\Debug\Lavlov.Lab3.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\bin\Debug\Lavlov.Lab3.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\obj\Debug\Lavlov.Lab3.csprojAssemblyReference.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\obj\Debug\Lavlov.Lab3.csproj.CoreCompileInputs.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\obj\Debug\Lavlov.Lab3.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlov.Lab3\obj\Debug\Lavlov.Lab3.pdb

@@ -1,0 +1,191 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace Lavlov.Lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool exit = true;
+            while (exit)
+            {
+                Console.WriteLine("1-Отгадай ответ\n2-Об авторе\n3-Сортировка\n4-Выход");
+                int menu;
+                while (!int.TryParse(Console.ReadLine(), out menu))
+                {
+                    Console.WriteLine("1-Отгадай ответ\n2-Об авторе\n3-Сортировка\n4-Выход");
+                }
+                switch (menu)
+                {
+                    case 1: //Отгадай ответ
+                        {
+                            Console.Write("Введите значение a:");
+                            double a;
+                            while (!double.TryParse(Console.ReadLine(), out a))
+                            {
+                                Console.WriteLine("Введите число");
+                            }
+                            double cos = (Math.Round(Math.Cos(Math.PI * (a * 2) / 180), 2));
+                            double sqrt = Math.Sqrt(cos);
+                            if (cos <= 0 && sqrt != Math.Pow(cos, 0.5))
+                            {
+                                Console.Write("Ошибка!\n");
+                            }
+                            else
+                            {
+                                Console.Write("Введите значение b:");
+                                double b;
+                                while (!double.TryParse(Console.ReadLine(), out b))
+                                {
+                                    Console.WriteLine("Введите число");
+                                }
+                                if (b <= 0)
+                                {
+                                    Console.WriteLine("Ошибка!\n");
+                                }
+                                else
+                                {
+                                    double result = Math.Round(Math.Pow(Math.Sin(Math.Log(b, 5) / Math.Sqrt(Math.Cos(Math.PI * a / 180 * 2))), 2), 2);
+                                    Console.WriteLine("Чему равно значение функции:F=Sin^2(Log(" + b + ",5)/Sqrt(Cos(2*" + a + ")))?");
+                                    double info;
+                                    int h = 3;
+                                    while (h > 0)
+                                    {
+                                        while (!double.TryParse(Console.ReadLine(), out info))
+                                        {
+                                            Console.WriteLine("Введите число");
+                                        }
+                                        if (info == result)
+                                        {
+                                            h = 0;
+                                            Console.WriteLine("Вы выйграли!");
+                                        }
+                                        else
+                                        {
+                                            h--;
+                                            Console.WriteLine("Ответ не верный. Попыток:" + h);
+                                        }
+                                        if (result != info && h == 0)
+                                            Console.WriteLine("Вы проиграли!\nПравильный ответ:" + result);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case 2: //Об авторе
+                        Console.WriteLine("Лавлов А.Ю., группа:6102\n");
+                        break;
+                    case 3: //Сортировка
+                        const int n = 10;
+                        Stopwatch watch_i = new Stopwatch();
+                        Stopwatch watch_g = new Stopwatch();
+                        int[] array = new int[n];
+                        int[] array_c = new int[n];
+                        RandArray(array, n);
+                        CopyArray(array, array_c, n);
+                        Console.Write("Исходный массив:");
+                        OutputArray(array);
+                        Console.WriteLine("\nНажите любую кнопку, чтобы продолжить.");
+                        Console.ReadKey();
+                        Console.WriteLine("\n   Сортировка вставками");
+                        watch_i.Start();
+                        InsertionSort(array, n);
+                        watch_i.Stop();
+                        Console.Write(watch_i.Elapsed + "\nОтсортированный массив:");
+                        OutputArray(array);
+                        Console.WriteLine("\n   Гномья сортировка");
+                        watch_g.Start();
+                        GnomeSort(array_c, n);
+                        watch_g.Stop();
+                        Console.Write(watch_g.Elapsed + "\nОтсортированный массив:");
+                        OutputArray(array_c);
+                        if (watch_i.Elapsed < watch_g.Elapsed)
+                            Console.WriteLine("\n   Сортировка вставками быстрее гномьей");
+                        else
+                            if (watch_g.Elapsed < watch_i.Elapsed)
+                            Console.WriteLine("\n   Гномья сортировка быстрее сортировки вставками");
+                        else
+                            Console.WriteLine("\n   Время одинаковое");
+                        Console.ReadLine();
+                        break;
+                    case 4: //Выход
+                        Console.WriteLine("Вы точно хотите выйти?\n д/н");
+                        switch (Console.ReadLine())
+                        {
+                            case "l":
+                                exit = false;
+                                break;
+                            case "y":
+                                break;
+                            default:
+                                Console.WriteLine("Ошибка!\n");
+                                break;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Ошибка!\n");
+                        break;
+                }
+            }
+        }
+        static int[] RandArray(int[] array, int n) //Рандомайзер массива 
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                array[i] = rnd.Next(-10, 10);
+            }
+            return array;
+        }
+        static void OutputArray(int[] array) //Вывод массива 
+        {
+            foreach (int i in array)
+            {
+                Console.Write("{0}  ", i);
+            }
+
+        }
+        static void InsertionSort(int[] array, int n) //Сортировка вставками
+        {
+            for (int i = 1; i < n; i++)
+            {
+                int j = i;
+                int temp = array[i];
+                while (j > 0 && temp < array[j - 1])
+                {
+                    array[j] = array[j - 1];
+                    j--;
+                }
+                array[j] = temp;
+            }
+        }
+        static void GnomeSort(int[] array, int n) //Гномья сортировка 
+        {
+            int i = 1;
+            while (i < n)
+            {
+                if (array[i] < array[i - 1])
+                {
+                    while (i > 0)
+                    {
+                        int temp = array[i];
+                        array[i] = array[i - 1];
+                        array[i - 1] = temp;
+                        i--;
+                    }
+                }
+                i++;
+            }
+        }
+        static int[] CopyArray(int[] array, int[] array_c, int n) //копирование массива 
+        {
+            for (int i = 0; i < n; i++)
+            {
+                array_c[i] = array[i];
+            }
+            return array_c;
+        }
+    }
+}

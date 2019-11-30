@@ -1,0 +1,6 @@
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\obj\Debug\Lavlov.Lab5.csprojAssemblyReference.cache
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\bin\Debug\Lavlova.Lab5.exe.config
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\bin\Debug\Lavlova.Lab5.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\bin\Debug\Lavlova.Lab5.pdb
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\obj\Debug\Lavlova.Lab5.exe
+D:\Андрей\Документы\Институт\Программирование\Lavlov\Lavlova.Lab5\obj\Debug\Lavlova.Lab5.pdb

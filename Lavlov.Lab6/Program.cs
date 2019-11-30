@@ -1,0 +1,604 @@
+﻿using System;
+using System.Diagnostics;
+
+namespace Lavlov.Lab6
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool exit = true;
+            while (exit)
+            {
+                Console.WriteLine("1-Отгадай ответ\n2-Об авторе\n3-Сортировка\n4-Игра реверси\n5-Работа со строками\n0-Выход");
+                int menu;
+                while (!int.TryParse(Console.ReadLine(), out menu))
+                {
+                    Console.WriteLine("1-Отгадай ответ\n2-Об авторе\n3-Сортировка\n4-Игра реверси\n5-Работа со строками\n0-Выход");
+                }
+                switch (menu)
+                {
+                    case 1: //Отгадай ответ
+                        {
+                            Console.Clear();
+                            Console.Write("Введите значение a:");
+                            double a;
+                            while (!double.TryParse(Console.ReadLine(), out a))
+                            {
+                                Console.WriteLine("Введите число");
+                            }
+                            double cos = (Math.Round(Math.Cos(Math.PI * (a * 2) / 180), 2));
+                            double sqrt = Math.Sqrt(cos);
+                            if (cos <= 0 && sqrt != Math.Pow(cos, 0.5))
+                            {
+                                Console.Write("Ошибка!\n");
+                            }
+                            else
+                            {
+                                Console.Write("Введите значение b:");
+                                double b;
+                                while (!double.TryParse(Console.ReadLine(), out b))
+                                {
+                                    Console.WriteLine("Введите число");
+                                }
+                                if (b <= 0)
+                                {
+                                    Console.WriteLine("Ошибка!\n");
+                                }
+                                else
+                                {
+                                    double result = Math.Round(Math.Pow(Math.Sin(Math.Log(b, 5) / Math.Sqrt(Math.Cos(Math.PI * a / 180 * 2))), 2), 2);
+                                    Console.WriteLine("Чему равно значение функции:F=Sin^2(Log(" + b + ",5)/Sqrt(Cos(2*" + a + ")))?");
+                                    double info;
+                                    int h = 3;
+                                    while (h > 0)
+                                    {
+                                        while (!double.TryParse(Console.ReadLine(), out info))
+                                        {
+                                            Console.WriteLine("Введите число");
+                                        }
+                                        if (info == result)
+                                        {
+                                            h = 0;
+                                            Console.WriteLine("Вы выйграли!");
+                                        }
+                                        else
+                                        {
+                                            h--;
+                                            Console.WriteLine("Ответ не верный. Попыток:" + h);
+                                        }
+                                        if (result != info && h == 0)
+                                            Console.WriteLine("Вы проиграли!\nПравильный ответ:" + result);
+                                    }
+                                }
+                            }
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        break;
+                    case 2: //Об авторе
+                        Console.Clear();
+                        Console.WriteLine("Лавлов А.Ю., группа:6102\n");
+                        break;
+                    case 3: //Сортировка
+                        {
+                            Console.Clear();
+                            const int n = 10;
+                            Stopwatch watch_i = new Stopwatch();
+                            Stopwatch watch_g = new Stopwatch();
+                            int[] array = new int[n];
+                            int[] array_c = new int[n];
+                            RandArray(array, n);
+                            CopyArray(array, array_c, n);
+                            Console.Write("Исходный массив:");
+                            OutputArray(array);
+                            Console.WriteLine("\nНажите любую кнопку, чтобы продолжить...");
+                            Console.ReadKey();
+                            Console.WriteLine("\n   Сортировка вставками");
+                            watch_i.Start();
+                            InsertionSort(array, n);
+                            watch_i.Stop();
+                            Console.Write(watch_i.Elapsed + "\nОтсортированный массив:");
+                            OutputArray(array);
+                            Console.WriteLine("\n   Гномья сортировка");
+                            watch_g.Start();
+                            GnomeSort(array_c, n);
+                            watch_g.Stop();
+                            Console.Write(watch_g.Elapsed + "\nОтсортированный массив:");
+                            OutputArray(array_c);
+                            if (watch_i.Elapsed < watch_g.Elapsed)
+                                Console.WriteLine("\n   Сортировка вставками быстрее гномьей");
+                            else
+                                if (watch_g.Elapsed < watch_i.Elapsed)
+                                Console.WriteLine("\n   Гномья сортировка быстрее сортировки вставками");
+                            else
+                                Console.WriteLine("\n   Время одинаковое");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        break;
+                    case 4: //Игра реверси
+                        Game();
+                        break;
+                    case 5: //Работа со строками
+                        const string defaultStr = @"Варкалось. Хливкие шорьки
+пырялись по наве
+И хрюкали зелюки,
+Как мюмзики в мове.
+О бойся Бармаглота, сын!
+Он так свиреп и дик,
+А в глуще рымит исполин -
+Злопасный Брандашмыг.";
+                        WorkWithString(defaultStr);
+                        //int Read(char[] array, int index, int count);
+                        break;
+                    case 0: //Выход
+                        {
+                            Console.WriteLine("Вы точно хотите выйти?\n д/н");
+                            switch (Console.ReadLine())
+                            {
+                                case "д":
+                                    exit = false;
+                                    break;
+                                case "н":
+                                    break;
+                                default:
+                                    Console.WriteLine("Ошибка!\n");
+                                    break;
+                            }
+                            break;
+                        }
+                    default:
+                        Console.WriteLine("Ошибка!\n");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                }
+            }
+        }
+        static int[] RandArray(int[] array, int n) //Рандомайзер массива 
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                array[i] = rnd.Next(-10, 10);
+            }
+            return array;
+        }
+        static void OutputArray(int[] array) //Вывод массива 
+        {
+            foreach (int i in array)
+            {
+                Console.Write("{0}  ", i);
+            }
+
+        }
+        static void InsertionSort(int[] array, int n) //Сортировка вставками
+        {
+            for (int i = 1; i < n; i++)
+            {
+                int j = i;
+                int temp = array[i];
+                while (j > 0 && temp < array[j - 1])
+                {
+                    array[j] = array[j - 1];
+                    j--;
+                }
+                array[j] = temp;
+            }
+        }
+        static void GnomeSort(int[] array, int n) //Гномья сортировка 
+        {
+            for (int i = 1; i < n; i++)
+            {
+                if (array[i] < array[i - 1])
+                {
+                    while (i > 0)
+                    {
+                        int temp = array[i];
+                        array[i] = array[i - 1];
+                        array[i - 1] = temp;
+                        i--;
+                    }
+                }
+            }
+        }
+        static int[] CopyArray(int[] array, int[] array_c, int n) //копирование массива 
+        {
+            for (int i = 0; i < n; i++)
+            {
+                array_c[i] = array[i];
+            }
+            return array_c;
+        }
+
+        static void Game()
+        {
+            byte k = 1;
+            const int black = 1;
+            const int white = 0;
+            const int n = 10;
+            const byte b = 8;
+            int color;
+            int[,] field = Board(n, black, white); ;
+            Console.Clear();
+            OutputBoard(field, n);
+            Console.SetCursorPosition(0, 18);
+            while (k <= b * b - 4)
+            {
+                string move;
+                if (k % 2 == 0)
+                {
+                    move = "белых ";
+                    color = white;
+                }
+                else
+                {
+                    move = "чёрных ";
+                    color = black;
+                }
+                Console.Write("Ход " + move);
+                int i, j;
+                Console.Write("введите координаты поля (X,Y):\n");
+                while (!int.TryParse(Console.ReadLine(), out j) | j > b | j < 1)
+                    Console.WriteLine("Ошибка!");
+                while (!int.TryParse(Console.ReadLine(), out i) | i > b | i < 1)
+                    Console.WriteLine("Ошибка!");
+                if (Check(field, i, j, color, b))
+                {
+                    Console.SetCursorPosition(4 * j + 1, 2 * i);
+                    if (k % 2 == 0)
+                        Console.Write(field[i, j] = 0);
+                    else
+                        Console.Write(field[i, j] = 1);
+                    Sleuth(field, i, j);
+                    k++;
+                }
+                Console.Clear();
+                OutputBoard(field, n);
+                Console.SetCursorPosition(0, 18);
+            }
+            Score(field);
+            Console.ReadLine();
+            Console.Clear();
+        }  //Игра реверси
+
+        static bool Check(int[,] field, int i, int j, int color, byte b)// Проверка наличия рядом вражеской фишки
+        {
+            if (color == 0) color = 1;
+            else color = 0;
+            bool check = false;
+            int[] chRow = { 0, -1, -1, -1, 1, 1, 1, 0 };
+            int[] chCol = { -1, -1, 0, 1, -1, 0, 1, 1 };
+            if (field[i, j] == 9)
+            {
+                if ((i == 1 & j == 1) | (i == 1 & j == 2) | (i == 2 & j == 1))
+                {
+                    for (int u = 4; u < b; u++)
+                    {
+                        if (field[i + chRow[u], j + chCol[u]] == color)
+                        {
+                            check = true;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int u = 0; u < b; u++)
+                    {
+                        if (field[i + chRow[u], j + chCol[u]] == color)
+                        {
+                            check = true;
+                        }
+                    }
+                }
+            }
+            return check;
+        }
+
+        static void Sleuth(int[,] field, int i, int j)// Поиска переворота "закрытых" фишек
+        {
+            int[] chRow = { 0, -1, -1, -1, 1, 1, 1, 0 };
+            int[] chCol = { -1, -1, 0, 1, -1, 0, 1, 1 };
+            int n, k;
+            int m, l;
+            int u = 0;
+            bool q = true; ;
+            while (u < 8)
+            {
+                if (field[i + chRow[u], j + chCol[u]] == 0 | field[i + chRow[u], j + chCol[u]] == 1)
+                {
+                    switch (u)
+                    {
+                        case 0:
+                            //ищем слева
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((m > 1) & (q))
+                            {
+                                m--;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    l--;
+                                    while (l > m)
+                                    {
+                                        ChangeColor(field, k, l);
+                                        l--;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 1:
+                            //ищем слева-вверху
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n > 1) & (m > 1) & (q))
+                            {
+                                n--;
+                                m--;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k--;
+                                    l--;
+                                    while ((k > n) & (l > m))
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k--;
+                                        l--;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 2:
+                            //ищем сверху
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n > 1) & (q))
+                            {
+                                n--;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k--;
+                                    while (k > n)
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k--;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+                        case 3:
+                            //ищем справа-вверху
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n > 1) & (m < 8) & (q))
+                            {
+                                n--;
+                                m++;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k--;
+                                    l++;
+                                    while ((k > n) & (l < m))
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k--;
+                                        l++;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 4:
+                            //ищем слева-внизу
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n < 8) & (m > 1) & (q))
+                            {
+                                n++;
+                                m--;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k++;
+                                    l--;
+                                    while ((k < n) & (l > m))
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k++;
+                                        l--;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 5:
+                            //ищем снизу
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n < 8) & (q))
+                            {
+                                n++;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k++;
+                                    while (k < n)
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k++;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 6:
+                            //ищем справа-внизу
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((n < 8) & (m < 8) & (q))
+                            {
+                                n++;
+                                m++;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    k++;
+                                    l++;
+                                    while ((k < n) & (l < m))
+                                    {
+                                        ChangeColor(field, k, l);
+                                        k++;
+                                        l++;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+
+                        case 7:
+                            //ищем справа
+                            k = n = i;
+                            l = m = j;
+                            q = true;
+                            while ((m < 8) & (q))
+                            {
+                                m++;
+                                if (field[n, m] == field[i, j])
+                                {
+                                    l++;
+                                    while (l < m)
+                                    {
+                                        ChangeColor(field, k, l);
+                                        l++;
+                                    }
+                                    q = false;
+                                }
+                            }
+                            break;
+                    }
+                }
+                u++;
+            }
+        }
+
+        static int[,] Board(int n, int black, int white)// Метод сборки игрового поля
+        {
+            int[,] field = new int[n, n];
+            int u = 0;
+            for (int j = 0; j < n; j++)//интерфейс столбцов
+            {
+                field[0, j] = u++;
+            }
+            u = 0;
+            for (int i = 0; i < n; i++)//интерфейс строк
+            {
+                field[i, 0] = u++;
+            }
+            for (int i = 1; i < n; i++)//заполнение поля пустыми клетками
+            {
+                for (int j = 1; j < n; j++)
+                {
+                    field[i, j] = 9;
+                }
+            }
+            //растоновка начальных фишек
+            field[4, 4] = black;
+            field[5, 5] = black;
+            field[5, 4] = white;
+            field[4, 5] = white;
+            return field;
+        }
+
+        static void OutputBoard(int[,] field, int n)// Метод вывода на экран игрового поля
+        {
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - 1; j++)
+                {
+                    if (field[i, j] == 9)
+                        Console.Write("   |");
+                    else Console.Write(" " + field[i, j] + " |");
+                }
+                Console.Write("\n");
+                for (int j = 0; j < n - 1; j++)
+                    Console.Write("--- ");
+                Console.Write("\n");
+            }
+        }
+
+        static void ChangeColor(int[,] field, int i, int j)// Переворачивание фищек
+        {
+            if (field[i, j] == 0)
+                field[i, j] = 1;
+            else
+                if (field[i, j] == 1)
+                field[i, j] = 0;
+        }
+
+        static void Score(int[,] field)//подсчет результата
+        {
+            const int n = 9;
+            int b = 0;
+            int w = 0;
+            for (int i = 1; i < n; i++)
+            {
+                for (int j = 1; j < n; j++)
+                {
+                    if (field[i, j] == 0)
+                        w++;
+                    if (field[i, j] == 1)
+                        b++;
+                }
+            }
+            Console.WriteLine("Счет Белые:" + w + " Чёрные:" + b);
+            if (w > b)
+                Console.WriteLine("Победа белых!\n");
+            else if (w < b)
+                Console.WriteLine("Победа чёрных!\n");
+            else
+                Console.WriteLine("Ничья!\n");
+        }
+
+        static void WorkWithString(string defaultStr)
+        {
+            Console.Clear();
+            Console.WriteLine("Введите строку.");
+            string s = Console.ReadLine();
+            if (s.Length == 0)
+            {
+                Console.WriteLine("Работала со строкой по умолчанию:");
+                Console.WriteLine(defaultStr);
+                Console.WriteLine("\nКоличество букв А(а) в строке: {0}.", SearchSymbols(defaultStr));
+            }
+            else
+            {
+                Console.WriteLine("\nКоличество букв А(а) встроке: {0}.", SearchSymbols(s));
+            }
+            Console.WriteLine();
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        static int SearchSymbols(string s)
+        {
+            int n = 0;
+            foreach (char c in s)
+                if (c == 'А' | c == 'а')
+                    n++;
+            return n;
+        }
+    }
+}
